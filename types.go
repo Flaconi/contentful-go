@@ -20,4 +20,5 @@ type Sys struct {
 	ArchivedAt       string       `json:"archivedAt,omitempty"`
 	ArchivedBy       *Sys         `json:"archivedBy,omitempty"`
 	ArchivedVersion  int          `json:"archivedVersion,omitempty"`
+	Status       	 *Sys         `json:"status,omitempty"`
 }
