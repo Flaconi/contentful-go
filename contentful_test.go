@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -296,14 +297,13 @@ func setup() {
 			}
 		}
 
-		file, err := ioutil.ReadFile(path)
+		file, err := os.ReadFile(path)
 		if err != nil {
 			_, _ = fmt.Fprintln(w, err)
 			return
 		}
 
 		_, _ = fmt.Fprintln(w, string(file))
-		return
 	})
 
 	server = httptest.NewServer(handler)
