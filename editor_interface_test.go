@@ -132,5 +132,5 @@ func TestEditorInterfacesService_Update(t *testing.T) {
 
 	err = cma.EditorInterfaces.Update(spaceID, "hfM9RCJIk0wIm06WkEOQY", editorInterface)
 	assertions.Nil(err)
-	assertions.Equal("changed id", editorInterface.Controls[0].WidgetID)
+	assertions.Equal("changed id", *editorInterface.Controls[0].WidgetID)
 }

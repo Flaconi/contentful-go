@@ -68,8 +68,8 @@ func TestFieldValidationRange(t *testing.T) {
 	var validationCheck FieldValidationRange
 	err = json.NewDecoder(bytes.NewReader(data)).Decode(&validationCheck)
 	assertions.Nil(err)
-	assertions.Equal(float64(60), validationCheck.Range.Min)
-	assertions.Equal(float64(100), validationCheck.Range.Max)
+	assertions.Equal(float64(60), *validationCheck.Range.Min)
+	assertions.Equal(float64(100), *validationCheck.Range.Max)
 	assertions.Equal("error message", validationCheck.ErrorMessage)
 
 	// greater than equal to
@@ -85,8 +85,8 @@ func TestFieldValidationRange(t *testing.T) {
 	validationCheck = FieldValidationRange{}
 	err = json.NewDecoder(bytes.NewReader(data)).Decode(&validationCheck)
 	assertions.Nil(err)
-	assertions.Equal(float64(10), validationCheck.Range.Min)
-	assertions.Equal(float64(0), validationCheck.Range.Max)
+	assertions.Equal(float64(10), *validationCheck.Range.Min)
+	assertions.Nil(validationCheck.Range.Max)
 	assertions.Equal("error message", validationCheck.ErrorMessage)
 
 	// less than equal to
@@ -102,8 +102,8 @@ func TestFieldValidationRange(t *testing.T) {
 	validationCheck = FieldValidationRange{}
 	err = json.NewDecoder(bytes.NewReader(data)).Decode(&validationCheck)
 	assertions.Nil(err)
-	assertions.Equal(float64(90), validationCheck.Range.Max)
-	assertions.Equal(float64(0), validationCheck.Range.Min)
+	assertions.Equal(float64(90), *validationCheck.Range.Max)
+	assertions.Nil(validationCheck.Range.Min)
 	assertions.Equal("error message", validationCheck.ErrorMessage)
 }
 
@@ -126,9 +126,9 @@ func TestFieldValidationSize(t *testing.T) {
 	var validationCheck FieldValidationSize
 	err = json.NewDecoder(bytes.NewReader(data)).Decode(&validationCheck)
 	assertions.Nil(err)
-	assertions.Equal(float64(4), validationCheck.Size.Min)
-	assertions.Equal(float64(6), validationCheck.Size.Max)
-	assertions.Equal("error message", validationCheck.ErrorMessage)
+	assertions.Equal(float64(4), *validationCheck.Size.Min)
+	assertions.Equal(float64(6), *validationCheck.Size.Max)
+	assertions.Equal("error message", *validationCheck.ErrorMessage)
 }
 
 func TestFieldValidationDate(t *testing.T) {

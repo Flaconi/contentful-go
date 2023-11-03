@@ -621,7 +621,7 @@ func TestContentTypeSaveForUpdate(t *testing.T) {
 	assertions.Nil(err)
 	assertions.Equal("63Vgs0BFK0USe4i2mQUGK6", ct.Sys.ID)
 	assertions.Equal("ct-name-updated", ct.Name)
-	assertions.Equal("ct-description-updated", ct.Description)
+	assertions.Equal("ct-description-updated", *ct.Description)
 	assertions.Equal(2, ct.Sys.Version)
 }
 

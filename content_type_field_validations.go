@@ -59,8 +59,8 @@ type FieldValidationMimeType struct {
 
 // MinMax model
 type MinMax struct {
-	Max *float64 `json:"max,omitempty"`
 	Min *float64 `json:"min,omitempty"`
+	Max *float64 `json:"max,omitempty"`
 }
 
 // DateMinMax model
