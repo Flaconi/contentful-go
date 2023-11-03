@@ -41,7 +41,7 @@ func TestFieldValidationPredefinedValues(t *testing.T) {
 
 	validation := &FieldValidationPredefinedValues{
 		In:           []interface{}{5, 10, "string", 6.4},
-		ErrorMessage: "error message",
+		ErrorMessage: valueToPointer("error message"),
 	}
 
 	data, err := json.Marshal(validation)
@@ -56,8 +56,8 @@ func TestFieldValidationRange(t *testing.T) {
 	// between
 	validation := &FieldValidationRange{
 		Range: &MinMax{
-			Min: 60,
-			Max: 100,
+			Min: valueToPointer(float64(60)),
+			Max: valueToPointer(float64(100)),
 		},
 		ErrorMessage: "error message",
 	}
@@ -75,7 +75,7 @@ func TestFieldValidationRange(t *testing.T) {
 	// greater than equal to
 	validation = &FieldValidationRange{
 		Range: &MinMax{
-			Min: 10,
+			Min: valueToPointer(float64(10)),
 		},
 		ErrorMessage: "error message",
 	}
@@ -92,7 +92,7 @@ func TestFieldValidationRange(t *testing.T) {
 	// less than equal to
 	validation = &FieldValidationRange{
 		Range: &MinMax{
-			Max: 90,
+			Max: valueToPointer(float64(90)),
 		},
 		ErrorMessage: "error message",
 	}
@@ -114,10 +114,10 @@ func TestFieldValidationSize(t *testing.T) {
 	// between
 	validation := &FieldValidationSize{
 		Size: &MinMax{
-			Min: 4,
-			Max: 6,
+			Min: valueToPointer(float64(4)),
+			Max: valueToPointer(float64(6)),
 		},
-		ErrorMessage: "error message",
+		ErrorMessage: valueToPointer("error message"),
 	}
 	data, err := json.Marshal(validation)
 	assertions.Nil(err)
@@ -159,4 +159,8 @@ func TestFieldValidationDate(t *testing.T) {
 	assertions.Equal(minStr, validationCheck.Range.Min.Format(layout))
 	assertions.Equal(maxStr, validationCheck.Range.Max.Format(layout))
 	assertions.Equal("error message", validationCheck.ErrorMessage)
+}
+
+func valueToPointer[T any](value T) *T {
+	return &value
 }
